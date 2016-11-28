@@ -4,31 +4,27 @@
 ####################################################################################################################################################
 ?>
 
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Prototype Quiz pour la Société Générale</title>
-	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700,800,900" rel="stylesheet">
-	<!-- Style du "wrapper" : partie corps du quiz -->
-	<style type='text/css'>
-	#wrapper {
-		width:950px;
-		height:auto;
-		padding: 13px;
-		margin-right:auto;
-		margin-left:auto;
-		background-color:#fff;
-		border-radius: 20px;
-		color: #34495E;
-		font-family: 'Raleway', sans-serif;
+<?php
+require 'inc/functions.php';
+logged_only();
+if(!empty($_POST)){
+
+	if(empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm']){
+		$_SESSION['flash']['danger'] = "Les mots de passes ne correspondent pas";
+	}else{
+		$user_id = $_SESSION['auth']->id;
+		$password= password_hash($_POST['password'], PASSWORD_BCRYPT);
+		require_once 'inc/db.php';
+		$pdo->prepare('UPDATE users SET password = ? WHERE id = ?')->execute([$password, $user_id]);
+		$_SESSION['flash']['success'] = "Votre mot de passe a bien été mis à jour";
 	}
-	</style>
-</head>
+
+}
+require 'inc/header.php';
+?>
 
 
-<body bgcolor="#E74C3C">
+
 
 <div id="wrapper">
 
@@ -49,7 +45,8 @@
 
 ?>
 
+	<button style="border-radius: 20%;" href="account.php">Revenez sur votre profil</button>
+
 </div>
 
-</body>
-</html>
+<?php require 'inc/footer.php'; ?>

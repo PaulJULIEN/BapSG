@@ -41,7 +41,7 @@ if(empty($errors)){
     $user_id = $pdo->lastInsertId();
     mail($_POST['email'], 'Confirmation de votre compte', "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://local.dev/Lab/Comptes/confirm.php?id=$user_id&token=$token");
     $_SESSION['flash']['success'] = 'Un email de confirmation vous a été envoyé pour valider votre compte';
-    header('Location: login.php');
+    header('Location: BapSG/login.php');
     exit();
 }
 

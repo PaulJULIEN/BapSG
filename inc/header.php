@@ -13,10 +13,12 @@ if(session_status() == PHP_SESSION_NONE){
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Mon super projet</title>
+    <title>Prototype Quizz BAP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/app.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700,800,900" rel="stylesheet">
+
 </head>
 
 <body>
@@ -30,7 +32,7 @@ if(session_status() == PHP_SESSION_NONE){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Mon super projet</a>
+            <a class="navbar-brand" href="#">Prototype quizz Société Générale</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
