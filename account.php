@@ -112,7 +112,7 @@ require 'inc/header.php';
         ?>
     </div>
 
-    <h2>Voulez vous changer votre mot de passe <?= $_SESSION['auth']->username; ?> ?</h2>
+    <h3>Voulez vous changer votre mot de passe <?= $_SESSION['auth']->username; ?> ?</h3>
 
     <form action="" method="post">
         <div class="form-group">
