@@ -27,77 +27,65 @@ require 'inc/header.php';
 
         <?php
 
+        $rid=rand(1,2);
+ echo $rid;
+ if ($rid==1){
         echo "
-<form action='process.php?id=1' method='post' id='quizForm' id='1'>
 
+<form action='process.php?id=1' method='post' id='quizForm' id='1'>
      <ol>
      <li>
         <h3>Question 1 :</h3>
-
         <div>
         <input type='radio' name='answerOne' id='answerOne' value='A' />
         <label for='answerOneA'>A) Réponse A</label>
         </div>
-
         <div>
         <input type='radio' name='answerOne' id='answerOne' value='B' />
         <label for='answerOneB'>B) Réponse B</label>
         </div>
-
         <div>
         <input type='radio' name='answerOne' id='answerOne' value='C' />
         <label for='answerOneC'>C) Réponse C</label>
         </div>
-
 	   <div>
         <input type='radio' name='answerOne' id='answerOne' value='D' />
         <label for='answerOneC'>D) Réponse D</label>
         </div>
         </li>
-
-
         <li>
         <h3>Question 2 :</h3>
-
         <div>
         <input type='radio' name='answerTwo' id='answerTwo' value='A' />
         <label for='answerTwoA'>A) Réponse A</label>
         </div>
-
         <div>
         <input type='radio' name='answerTwo' id='answerTwo' value='B' />
         <label for='answerTwoB'>B) Réponse B</label>
         </div>
-
         <div>
         <input type='radio' name='answerTwo' id='answerTwo' value='C' />
         <label for='answerTwoC'>C) Réponse C</label>
         </div>
-
         <div>
         <input type='radio' name='answerTwo' id='answerTwo' value='D' />
         <label for='answerTwoD'>D) Réponse D</label>
         </div>
         </li>
-
         <li>
         <h3>Question 3 :</h3>
-
         <div>
         <input type='radio' name='answerThree' id='answerThree' value='A' />
         <label for='answerThreeA'>A) Réponse A</label>
         </div>
-
         <div>
         <input type='radio' name='answerThree' id='answerThree' value='B' />
         <label for='answerThreeB'>B) Réponse B</label>
         </div>
-
         <div>
         <input type='radio' name='answerThree' id='answerThree' value='C' />
         <label for='answerThreeC'>C) Réponse C</label>
         </div>
-
         <div>
         <input type='radio' name='answerThree' id='answerThree' value='D' />
         <label for='answerThreeD'>D) Réponse D</label>
@@ -106,8 +94,75 @@ require 'inc/header.php';
     </ol>
         <br>
         <input id='submitb' type='submit' value='Valider le quiz' />
-
 </form>";
+}
+ if ($rid==2){
+        echo "
+
+<form action='process.php?id=1' method='post' id='quizForm' id='2'>
+     <ol>
+     <li>
+        <h3>Question 1 :</h3>
+        <div>
+        <input type='radio' name='answerOne' id='answerOne' value='A' />
+        <label for='answerOneA'>A) Réponse A</label>
+        </div>
+        <div>
+        <input type='radio' name='answerOne' id='answerOne' value='B' />
+        <label for='answerOneB'>B) Réponse B</label>
+        </div>
+        <div>
+        <input type='radio' name='answerOne' id='answerOne' value='C' />
+        <label for='answerOneC'>C) Réponse C</label>
+        </div>
+       <div>
+        <input type='radio' name='answerOne' id='answerOne' value='D' />
+        <label for='answerOneC'>D) Réponse D</label>
+        </div>
+        </li>
+        <li>
+        <h3>Question 2 :</h3>
+        <div>
+        <input type='radio' name='answerTwo' id='answerTwo' value='A' />
+        <label for='answerTwoA'>A) Réponse A</label>
+        </div>
+        <div>
+        <input type='radio' name='answerTwo' id='answerTwo' value='B' />
+        <label for='answerTwoB'>B) Réponse B</label>
+        </div>
+        <div>
+        <input type='radio' name='answerTwo' id='answerTwo' value='C' />
+        <label for='answerTwoC'>C) Réponse C</label>
+        </div>
+        <div>
+        <input type='radio' name='answerTwo' id='answerTwo' value='D' />
+        <label for='answerTwoD'>D) Réponse D</label>
+        </div>
+        </li>
+        <li>
+        <h3>Question 3 :</h3>
+        <div>
+        <input type='radio' name='answerThree' id='answerThree' value='A' />
+        <label for='answerThreeA'>A) Réponse A</label>
+        </div>
+        <div>
+        <input type='radio' name='answerThree' id='answerThree' value='B' />
+        <label for='answerThreeB'>B) Réponse B</label>
+        </div>
+        <div>
+        <input type='radio' name='answerThree' id='answerThree' value='C' />
+        <label for='answerThreeC'>C) Réponse C</label>
+        </div>
+        <div>
+        <input type='radio' name='answerThree' id='answerThree' value='D' />
+        <label for='answerThreeD'>D) Réponse D</label>
+        </div>
+        </li>
+    </ol>
+        <br>
+        <input id='submitb' type='submit' value='Valider le quiz' />
+</form>";
+}
 
         ?>
     </div>

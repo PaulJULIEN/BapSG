@@ -31,6 +31,7 @@ require 'inc/header.php';
 	if ($answer3 == "C"){$score++;}
 	echo "<center><h2>Votre score est <br> $score/3</h2></center>";
 
+$fid = $_get['id']
 ?>
 
 	<a class="btn btn-success" href="account.php">Recommencer</a>
