@@ -35,7 +35,7 @@ require 'inc/header.php';
 	$fid = $_get['id'];
 
 	require_once 'inc/db.php';
-	 $req = $pdo->prepare("INSERT INTO users SET score = $score");
+	 $req = $pdo->prepare("UPDATE users SET score = $score");
 	 $req->execute([$_POST['score']]);
 	 $score=$req->fetch();
 ?>
