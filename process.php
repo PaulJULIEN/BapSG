@@ -19,8 +19,8 @@ require 'inc/header.php';
 <center><h1>SCORE</h1></center>
 <br />
 <br />
-<!-- Récupérer les données du formulaire et ajouter le score en fonction des réponses -->
 <?php
+// Récupérer les données du formulaire et ajouter le score en fonction des réponses
 	$answer1= $_POST['answerOne'];
 	$answer2= $_POST['answerTwo'];
 	$answer3= $_POST['answerThree'];
@@ -31,7 +31,13 @@ require 'inc/header.php';
 	if ($answer3 == "C"){$score++;}
 	echo "<center><h2>Votre score est <br> $score/3</h2></center>";
 
-$fid = $_get['id']
+	// Pour gérer les quiz avec les id et la fonction rand
+	$fid = $_get['id'];
+
+	require_once 'inc/db.php';
+	 $req = $pdo->prepare("INSERT INTO users SET score = $score");
+	 $req->execute([$_POST['score']]);
+	 $score=$req->fetch();
 ?>
 
 	<a class="btn btn-success" href="account.php">Recommencer</a>

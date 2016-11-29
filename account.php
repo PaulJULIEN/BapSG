@@ -26,10 +26,11 @@ require 'inc/header.php';
         <br><br>
 
         <?php
-
+        // Générer un random aux id des quiz
         $rid=rand(1,2);
- echo $rid;
- if ($rid==1){
+        echo $rid;
+
+        if ($rid==1){
         echo "
 
 <form action='process.php?id=1' method='post' id='quizForm' id='1'>
