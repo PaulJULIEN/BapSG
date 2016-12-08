@@ -1,35 +1,27 @@
 <?php
 require 'inc/functions.php';
-require 'inc/header.php';
-
-
 logged_only();
-if(!empty($_POST)){
 
-    if(empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm']){
-        $_SESSION['flash']['danger'] = "Les mots de passes ne correspondent pas";
-    }else{
-        $user_id = $_SESSION['auth']->id;
-        $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
-        require_once 'inc/db.php';
-        $pdo->prepare('UPDATE users SET password = ? WHERE id = ?')->execute([$password, $user_id]);
-        $_SESSION['flash']['success'] = "Votre mot de passe a bien été mis à jour";
-    }
-
-}
+require 'inc/header.php';
 ?>
-
-
 
     <div id='wrapper'>
 
-    <center><h1>PROTOTYPE QUIZ PHP <span>SOCIÉTÉ GÉNÉRALE</span></h1></center>
-    <center>Réponse A (question 1), réponse B (question 2), réponse C (question 3)</center>
-    <br>
-    <br>
-    <br><br>
+        <center><h1>PROTOTYPE QUIZ PHP <span>SOCIÉTÉ GÉNÉRALE</span></h1></center>
+        <center>Réponse A (question 1), réponse B (question 2), réponse C (question 3)</center>
+        <br>
+        <br>
+        <br><br>
 
         <?php
+
+        $id_case = 1;
+        affiche($id_case);
+
+        $answer1= $_POST['answerOne'];
+                   $answer2= $_POST['answerTwo'];
+                   $answer3= $_POST['answerThree'];
+                   $score = 0;
         // Générer un random aux id des quiz
         $rid=rand(1,2);
         echo $rid;
@@ -37,12 +29,7 @@ if(!empty($_POST)){
         if ($rid==1){
         echo "
 
-<form action='process.php?id=1' method='post' id='quizForm' id='1'>
-    <?php
-
-    echo "
-<form action='process.php?id=1' method='post' id='quizForm 1'>
-
+<form action='account.php?id=1' method='post' id='quizForm' id='1'>
      <ol>
      <li>
         <h3>Question 1 :</h3>
@@ -109,7 +96,7 @@ if(!empty($_POST)){
  if ($rid==2){
         echo "
 
-<form action='process.php?id=1' method='post' id='quizForm' id='2'>
+<form action='account.php?id=1' method='post' id='quizForm' id='2'>
      <ol>
      <li>
         <h3>Question 1 :</h3>
@@ -174,48 +161,23 @@ if(!empty($_POST)){
 </form>";
 }
 
+           // Augmenter le score si réponse bonne + phrases si bonne ou mauvaise réponse
+           if ($answer1 == "A"){$score++;echo'<p style="background-color:green;color:white;">Bonne réponse</p>';}
+           else{echo'<p style="background-color:red;color:white;">Mauvaise réponse</p>';}
+           if ($answer2 == "B"){$score++;echo'<p style="background-color:green;color:white;">Bonne réponse</p>';}
+           else{echo'<p style="background-color:red;color:white;">Mauvaise réponse</p>';}
+           if ($answer3 == "C"){$score++;echo'<p style="background-color:green;color:white;">Bonne réponse</p>';}
+           else{echo'<p style="background-color:red;color:white;">Mauvaise réponse</p>';}
+           // Afficher le score
+           echo "<center><h2>Votre score est <br> $score/3</h2></center>";
+           // Ajouter le score dans la bdd
+           require_once 'inc/db.php';
+           $req = $pdo->prepare("UPDATE users SET score = $score");
+           $req->execute([$_POST['score']]);
+           $score=$req->fetch();
 
-    $points = 5;
-    $id_case = 1;
-
-function ajout_score () {
-
-    if (isset ($_POST['points']) && isset($_POST['id_case'])) {
-
-        // on prépare la requête pour récupérer les points
-        $sql = 'SELECT score FROM users WHERE score = "'.$_POST['points'].'"';
-
-
-
-        // on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
-        $req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
-
-
-        // on récupère le résultat sous forme d'un tableau
-        $data = mysql_fetch_array($req);
-
-        // on libère l'espace mémoire alloué pour cette interrogation de la base
-        mysql_free_result ($req);
-
-        // on insère et au cas où, on écrira un petit message d'erreur si la requête ne se passe pas bien (or die)
-        $sql = ' INSERT INTO users VALUES("'.$data['score'].'", "'.$_POST['points'].'", "'.$_POST['id_case'].'")';
-
-        mysql_query ($sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
-
-        // on ferme la connexion à la base
-        mysql_close();
-
-        echo 'Nous venons d\'insérer : '.$_POST['id_case'].' de '.$_POST['points'];
-    }
-    else {
-        echo 'Les variables du formulaire ne sont pas déclarées';
-    }
-
-
-}
-
-
-    ?>
+        ?>
+    </div>
 
     <h3>Voulez vous changer votre mot de passe <?= $_SESSION['auth']->username; ?> ?</h3>
 
@@ -230,15 +192,6 @@ function ajout_score () {
     </form>
 
 
-    <div id='wrapper'>
 
-
-<?php require 'inc/footer.php'; ?>
-
-
-
-
-
-    </div>
 
 <?php require 'inc/footer.php'; ?>
