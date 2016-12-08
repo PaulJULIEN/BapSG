@@ -1,5 +1,8 @@
 <?php
 require 'inc/functions.php';
+require 'inc/header.php';
+
+
 logged_only();
 if(!empty($_POST)){
 
@@ -14,16 +17,17 @@ if(!empty($_POST)){
     }
 
 }
-require 'inc/header.php';
 ?>
+
+
 
     <div id='wrapper'>
 
-        <center><h1>PROTOTYPE QUIZ PHP <span>SOCIÉTÉ GÉNÉRALE</span></h1></center>
-        <center>Réponse A (question 1), réponse B (question 2), réponse C (question 3)</center>
-        <br>
-        <br>
-        <br><br>
+    <center><h1>PROTOTYPE QUIZ PHP <span>SOCIÉTÉ GÉNÉRALE</span></h1></center>
+    <center>Réponse A (question 1), réponse B (question 2), réponse C (question 3)</center>
+    <br>
+    <br>
+    <br><br>
 
         <?php
         // Générer un random aux id des quiz
@@ -34,6 +38,11 @@ require 'inc/header.php';
         echo "
 
 <form action='process.php?id=1' method='post' id='quizForm' id='1'>
+    <?php
+
+    echo "
+<form action='process.php?id=1' method='post' id='quizForm 1'>
+
      <ol>
      <li>
         <h3>Question 1 :</h3>
@@ -165,8 +174,48 @@ require 'inc/header.php';
 </form>";
 }
 
-        ?>
-    </div>
+
+    $points = 5;
+    $id_case = 1;
+
+function ajout_score () {
+
+    if (isset ($_POST['points']) && isset($_POST['id_case'])) {
+
+        // on prépare la requête pour récupérer les points
+        $sql = 'SELECT score FROM users WHERE score = "'.$_POST['points'].'"';
+
+
+
+        // on lance la requête (mysql_query) et on impose un message d'erreur si la requête ne se passe pas bien (or die)
+        $req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
+
+
+        // on récupère le résultat sous forme d'un tableau
+        $data = mysql_fetch_array($req);
+
+        // on libère l'espace mémoire alloué pour cette interrogation de la base
+        mysql_free_result ($req);
+
+        // on insère et au cas où, on écrira un petit message d'erreur si la requête ne se passe pas bien (or die)
+        $sql = ' INSERT INTO users VALUES("'.$data['score'].'", "'.$_POST['points'].'", "'.$_POST['id_case'].'")';
+
+        mysql_query ($sql) or die ('Erreur SQL !'.$sql.'<br />'.mysql_error());
+
+        // on ferme la connexion à la base
+        mysql_close();
+
+        echo 'Nous venons d\'insérer : '.$_POST['id_case'].' de '.$_POST['points'];
+    }
+    else {
+        echo 'Les variables du formulaire ne sont pas déclarées';
+    }
+
+
+}
+
+
+    ?>
 
     <h3>Voulez vous changer votre mot de passe <?= $_SESSION['auth']->username; ?> ?</h3>
 
@@ -181,6 +230,15 @@ require 'inc/header.php';
     </form>
 
 
+    <div id='wrapper'>
 
+
+<?php require 'inc/footer.php'; ?>
+
+
+
+
+
+    </div>
 
 <?php require 'inc/footer.php'; ?>

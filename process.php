@@ -40,6 +40,7 @@ require 'inc/header.php';
 	 $score=$req->fetch();
 ?>
 
+
 	<a class="btn btn-success" href="account.php">Recommencer</a>
 
 </div>

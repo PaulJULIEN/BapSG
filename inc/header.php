@@ -2,7 +2,11 @@
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
-?><!DOCTYPE html>
+
+?>
+<?php require ('db.php');
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
