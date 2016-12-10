@@ -13,10 +13,15 @@ require 'inc/header.php';
         <br>
         <br><br>
 
+        <div class="case"></div>
+
         <?php
 
+
+        //Lancer la function affichage
         $id_case = 1;
         affiche($id_case);
+
 
         $answer1= $_POST['answerOne'];
                    $answer2= $_POST['answerTwo'];

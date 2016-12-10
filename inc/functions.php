@@ -66,3 +66,12 @@ function affiche ($id_case) {
 
 }
 
+/*
+function avancement ($avancement_users){
+    require 'db.php';
+
+    $req = $pdo->("SELECT * FROM users WHERE avancement = $avancement_users");
+    $req->execute([$_POST['type']]);
+    $contenu=$req->fetch();
+}
+*/
