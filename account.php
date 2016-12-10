@@ -1,19 +1,7 @@
 <?php
 require 'inc/functions.php';
 logged_only();
-if(!empty($_POST)){
 
-    if(empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm']){
-        $_SESSION['flash']['danger'] = "Les mots de passes ne correspondent pas";
-    }else{
-        $user_id = $_SESSION['auth']->id;
-        $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
-        require_once 'inc/db.php';
-        $pdo->prepare('UPDATE users SET password = ? WHERE id = ?')->execute([$password, $user_id]);
-        $_SESSION['flash']['success'] = "Votre mot de passe a bien été mis à jour";
-    }
-
-}
 require 'inc/header.php';
 ?>
 
@@ -25,7 +13,20 @@ require 'inc/header.php';
         <br>
         <br><br>
 
+        <div class="case"></div>
+
         <?php
+
+
+        //Lancer la function affichage
+        $id_case = 1;
+        affiche($id_case);
+
+
+        $answer1= $_POST['answerOne'];
+                   $answer2= $_POST['answerTwo'];
+                   $answer3= $_POST['answerThree'];
+                   $score = 0;
         // Générer un random aux id des quiz
         $rid=rand(1,2);
         echo $rid;
@@ -33,7 +34,7 @@ require 'inc/header.php';
         if ($rid==1){
         echo "
 
-<form action='process.php?id=1' method='post' id='quizForm' id='1'>
+<form action='account.php?id=1' method='post' id='quizForm' id='1'>
      <ol>
      <li>
         <h3>Question 1 :</h3>
@@ -100,7 +101,7 @@ require 'inc/header.php';
  if ($rid==2){
         echo "
 
-<form action='process.php?id=1' method='post' id='quizForm' id='2'>
+<form action='account.php?id=1' method='post' id='quizForm' id='2'>
      <ol>
      <li>
         <h3>Question 1 :</h3>
@@ -164,6 +165,21 @@ require 'inc/header.php';
         <input id='submitb' type='submit' value='Valider le quiz' />
 </form>";
 }
+
+           // Augmenter le score si réponse bonne + phrases si bonne ou mauvaise réponse
+           if ($answer1 == "A"){$score++;echo'<p style="background-color:green;color:white;">Bonne réponse</p>';}
+           else{echo'<p style="background-color:red;color:white;">Mauvaise réponse</p>';}
+           if ($answer2 == "B"){$score++;echo'<p style="background-color:green;color:white;">Bonne réponse</p>';}
+           else{echo'<p style="background-color:red;color:white;">Mauvaise réponse</p>';}
+           if ($answer3 == "C"){$score++;echo'<p style="background-color:green;color:white;">Bonne réponse</p>';}
+           else{echo'<p style="background-color:red;color:white;">Mauvaise réponse</p>';}
+           // Afficher le score
+           echo "<center><h2>Votre score est <br> $score/3</h2></center>";
+           // Ajouter le score dans la bdd
+           require_once 'inc/db.php';
+           $req = $pdo->prepare("UPDATE users SET score = $score");
+           $req->execute([$_POST['score']]);
+           $score=$req->fetch();
 
         ?>
     </div>

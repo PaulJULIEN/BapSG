@@ -21,23 +21,7 @@ require 'inc/header.php';
 <br />
 <?php
 // Récupérer les données du formulaire et ajouter le score en fonction des réponses
-	$answer1= $_POST['answerOne'];
-	$answer2= $_POST['answerTwo'];
-	$answer3= $_POST['answerThree'];
-	$score = 0;
 
-	if ($answer1 == "A"){$score++;}
-	if ($answer2 == "B"){$score++;}
-	if ($answer3 == "C"){$score++;}
-	echo "<center><h2>Votre score est <br> $score/3</h2></center>";
-
-	// Pour gérer les quiz avec les id et la fonction rand
-	$fid = $_get['id'];
-
-	require_once 'inc/db.php';
-	 $req = $pdo->prepare("UPDATE users SET score = $score");
-	 $req->execute([$_POST['score']]);
-	 $score=$req->fetch();
 ?>
 
 	<a class="btn btn-success" href="account.php">Recommencer</a>

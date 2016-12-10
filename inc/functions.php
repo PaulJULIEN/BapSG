@@ -1,4 +1,9 @@
+
+
+
 <?php
+
+
 function debug($variable){
     echo '<pre>' . print_r($variable, true) . '</pre>';
 }
@@ -48,3 +53,25 @@ function reconnect_from_cookie(){
         }
     }
 }
+
+function affiche ($id_case) {
+
+    require 'db.php';
+
+    $req = $pdo->prepare("SELECT * FROM cases WHERE id = $id_case");
+    $req->execute([$_POST['type']]);
+    $contenu=$req->fetch();
+    var_dump($contenu);
+
+
+}
+
+/*
+function avancement ($avancement_users){
+    require 'db.php';
+
+    $req = $pdo->("SELECT * FROM users WHERE avancement = $avancement_users");
+    $req->execute([$_POST['type']]);
+    $contenu=$req->fetch();
+}
+*/
