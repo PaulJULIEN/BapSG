@@ -58,11 +58,3 @@ function affiche ($id_case) {
     $contenu=$req->fetch();
     //var_dump($contenu);
 }
-
-/*function stats ($avancement_users){
-    require 'db.php';
-
-    $req = $pdo->prepare("SELECT * FROM users WHERE avancement = $avancement_users");
-    $req->execute([$_POST['avancement']]);
-    $contenu=$req->fetch();
-}*/

@@ -2,7 +2,8 @@
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -12,6 +13,7 @@ if(session_status() == PHP_SESSION_NONE){
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+    <link href="css/style.css" rel="stylesheet">
 
     <title>Prototype Quizz BAP</title>
 
@@ -38,7 +40,7 @@ if(session_status() == PHP_SESSION_NONE){
             <ul class="nav navbar-nav">
                 <?php if (isset($_SESSION['auth'])): ?>
                     <li><a href="logout.php">Se déconnecter</a></li>
-                <?php else: ?>  
+                <?php else: ?>
                     <li><a href="register.php">S'inscrire</a></li>
                     <li><a href="login.php">Se connecter</a></li>
                 <?php endif; ?>
@@ -57,4 +59,3 @@ if(session_status() == PHP_SESSION_NONE){
         <?php endforeach; ?>
         <?php unset($_SESSION['flash']); ?>
     <?php endif; ?>
-
