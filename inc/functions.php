@@ -1,9 +1,4 @@
-
-
-
 <?php
-
-
 function debug($variable){
     echo '<pre>' . print_r($variable, true) . '</pre>';
 }
@@ -61,17 +56,13 @@ function affiche ($id_case) {
     $req = $pdo->prepare("SELECT * FROM cases WHERE id = $id_case");
     $req->execute([$_POST['type']]);
     $contenu=$req->fetch();
-    var_dump($contenu);
-
-
+    //var_dump($contenu);
 }
 
-/*
-function avancement ($avancement_users){
+/*function stats ($avancement_users){
     require 'db.php';
 
-    $req = $pdo->("SELECT * FROM users WHERE avancement = $avancement_users");
-    $req->execute([$_POST['type']]);
+    $req = $pdo->prepare("SELECT * FROM users WHERE avancement = $avancement_users");
+    $req->execute([$_POST['avancement']]);
     $contenu=$req->fetch();
-}
-*/
+}*/
