@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<center><H1 id="titre">Test Animation</H1></center>
+<center><input type="button" name="" value="Module 1" onmouseup="M1.move('md1');" /></center>
+<center><input type="button" name="" value="Module 2" onmouseup="M1.move('md2');" /></center>
+<center><input type="button" name="" value="Module 3" onmouseup="M1.move('md3');" /></center>
+<center><input type="button" name="" value="Module 4" onmouseup="M1.move('md4');" /></center>
+<center><img id="img" src="voiture.png" /></center>
+
+<script type="text/javascript">
+
+
+function Move(o){
+ var oop=this,img=document.getElementById(o.ImageID),md2,md1,ms=o.Duration,c;
+ if (img){
+  c=document.createElement('IMG');
+  c.src=img.src;
+  c.style.position='fixed';
+  c.style.visibility='hidden';
+  md2=c.cloneNode(false);
+  md2.style.right='0px';
+  md2.style.bottom='0px';
+  md2.style.width=img.width+'px';
+  md2.style.height=img.height+'px';
+  document.body.appendChild(md2);
+  oop.md2=md2;
+  md1=c.cloneNode(false);
+  md1.style.left='0px';
+  md1.style.top='0px';
+  md1.style.width=img.width+'px';
+  md1.style.height=img.height+'px';
+  document.body.appendChild(md1);
+  oop.md1=md1;
+  oop.img=img;
+  c.style.position='absolute';
+  c.style.zIndex='101';
+  c.style.left='-3000px';
+  c.style.top='-3000px';
+  c.style.width=img.width+'px';
+  c.style.height=img.height+'px';
+  oop.c=c;
+  document.body.appendChild(c);
+  oop.ms=ms;
+ }
+}
+
+Move.prototype={
+
+ move:function(s){
+  var oop=this,to=oop[s],p=oop.pos(oop.img);
+  if (to){
+   oop.img.style.visibility='hidden';
+   oop.c.style.visibility='visible';
+   to=oop.pos(to);
+   oop.animate('left',p[0],to[0],new Date(),oop.ms,s+'l');
+   oop.animate('top',p[1],to[1],new Date(),oop.ms,s+'t');
+  }
+ },
+ animate:function(mde,f,t,srt,mS,to){
+  var oop=this,ms=new Date().getTime()-srt,now=(t-f)/mS*ms+f;
+  if (isFinite(now)){
+   oop.c.style[mde]=now+'px';
+  }
+  if (ms<mS){
+   oop[to]=setTimeout(function(){ oop.animate(mde,f,t,srt,mS,to); },10);
+  }
+  else {
+   oop.c.style[mde]=t+'px';
+  }
+ },
+
+ pos:function(obj){
+  var rtn=[0,0];
+  while(obj){
+   rtn[0]+=obj.offsetLeft;
+   rtn[1]+=obj.offsetTop;
+   obj=obj.offsetParent;
+  }
+  return rtn;
+ }
+
+}
+
+M1=new Move({
+ ImageID:'img',
+ md2AnchorID:'md2',
+ md1AnchorID:'md1',
+ Duration:1000
+});
+</script>
+</body>
+
+</html>

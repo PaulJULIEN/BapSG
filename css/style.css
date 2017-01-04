@@ -1,3 +1,10 @@
+#img {
+  width:100px;height:50px;
+}
+.titre{
+  text-align: center;
+}
+  
 .case {
   background-color: #404040;
   color:white;
