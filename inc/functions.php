@@ -49,11 +49,11 @@ function reconnect_from_cookie(){
     }
 }
 
-function affiche ($id_case) {
+function affiche ($id_cases) {
 
     require 'db.php';
 
-    $req = $pdo->prepare("SELECT * FROM cases WHERE id = $id_case");
+    $req = $pdo->prepare("SELECT * FROM cases WHERE id = $id_cases");
     $req->execute([$_POST['type']]);
     $contenu=$req->fetch();
     //var_dump($contenu);
